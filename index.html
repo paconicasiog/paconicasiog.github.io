@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Jose F. Nicasio-Garnica, Head of Data & Analytics in Mexico City. Python, SQL and AI projects that moved business decisions.">
+<title>Jose F. Nicasio-Garnica</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0} img{max-width:100%} [hidden]{display:none!important}
+</style>
+<style>
+/* Layout: a one-column case file. Each project reads Problem → What I built → Decision it changed, like a P&L line from cause to result. */
+:root{
+  --bg:#F2F4F3; --surface:#FFFFFF; --fg:#16211D; --muted:#5B6A64; --line:#D5DDD9;
+  --accent:#0E6B5C; --accent-soft:#DCEDE8; --mark:#A86C0A; --mark-soft:#F6EAD3;
+  --code-bg:#17211E; --code-fg:#D7E6E0; --code-dim:#7F948C; --code-key:#7FD6C0; --code-str:#E8B866;
+  --display:"Bricolage Grotesque","Avenir Next",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1412; --surface:#151D1A; --fg:#E2EAE6; --muted:#93A49D; --line:#26322E;
+  --accent:#55C7AD; --accent-soft:#18302A; --mark:#E2A93F; --mark-soft:#2E2412;
+  --code-bg:#0A0F0D; --code-fg:#D7E6E0; --code-dim:#6E827A; --code-key:#7FD6C0; --code-str:#E8B866; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1412; --surface:#151D1A; --fg:#E2EAE6; --muted:#93A49D; --line:#26322E;
+  --accent:#55C7AD; --accent-soft:#18302A; --mark:#E2A93F; --mark-soft:#2E2412;
+  --code-bg:#0A0F0D; --code-fg:#D7E6E0; --code-dim:#6E827A; --code-key:#7FD6C0; --code-str:#E8B866; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:980px;margin:0 auto;padding-block:56px 72px;display:flex;flex-direction:column;gap:88px}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.05}
+p{margin:0}
+code{font-family:var(--mono);font-size:.88em}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* Hero */
+.hero{display:flex;flex-direction:column;gap:26px}
+.hero h1{font-size:clamp(40px,7.4vw,80px);font-weight:800;letter-spacing:-.025em}
+.role{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.8vw,28px);color:var(--accent);letter-spacing:-.01em}
+.lede{font-size:clamp(17px,2.2vw,20px);max-width:58ch}
+.contact{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.contact a{color:var(--fg)}
+.contact span{user-select:all}
+
+/* KPI strip */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--fg);border-bottom:1px solid var(--line)}
+.kpis div{padding:18px 18px 18px 0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.kpis div+div{padding-left:18px;border-left:1px solid var(--line)}
+.kpis b{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.6vw,36px);letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.kpis span{font-size:13.5px;color:var(--muted);line-height:1.4}
+
+/* Section heading */
+.sec-head{display:flex;flex-direction:column;gap:10px;margin-bottom:36px}
+.sec-head h2{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.015em}
+.sec-head p{max-width:62ch;color:var(--muted)}
+
+/* Trajectory */
+.traj{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.traj li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding:16px 0;border-top:1px solid var(--line)}
+.traj li:last-child{border-bottom:1px solid var(--line)}
+.traj time{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
+.traj h3{font-family:var(--body);font-size:16px;font-weight:600;line-height:1.35}
+.traj h3 em{font-style:normal;color:var(--muted);font-weight:400}
+.traj p{font-size:14.5px;color:var(--muted);margin-top:4px;max-width:64ch}
+
+/* Projects */
+.projects{display:flex;flex-direction:column;gap:64px}
+.project{display:grid;grid-template-columns:230px minmax(0,1fr);gap:36px;padding-top:26px;border-top:2px solid var(--fg)}
+.p-side{display:flex;flex-direction:column;gap:16px}
+.p-side h3{font-size:28px;font-weight:700;letter-spacing:-.01em}
+.p-kind{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.stack{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.stack li{font-family:var(--mono);font-size:12px;padding:3px 8px;border-radius:3px;background:var(--accent-soft)}
+.repo{font-family:var(--mono);font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:2px;overflow-wrap:anywhere}
+.repo .lock{color:var(--mark)}
+.p-main{display:flex;flex-direction:column;gap:24px;min-width:0}
+
+.case{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 28px}
+.case div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.case h4{margin:0;font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.case p{font-size:15.5px}
+.impact{background:var(--mark-soft);border-radius:6px;padding:16px 20px;display:flex;flex-direction:column;gap:6px}
+.impact h4{margin:0;font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mark)}
+.impact p{font-size:16px;font-weight:500;line-height:1.5}
+
+/* Pipeline */
+.pipe{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden}
+.pipe li{padding:13px 16px;display:flex;flex-direction:column;gap:3px;border-right:1px solid var(--line);position:relative;min-width:0}
+.pipe li:last-child{border-right:0}
+.pipe .st{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.05em}
+.pipe .nm{font-weight:600;font-size:14px;line-height:1.3}
+.pipe .dt{font-size:12.5px;color:var(--muted);line-height:1.4}
+.pipe li:not(:last-child)::after{content:"→";position:absolute;right:-9px;top:13px;width:18px;height:18px;display:grid;place-items:center;font-size:12px;background:var(--surface);color:var(--accent);border:1px solid var(--line);border-radius:50%;z-index:1}
+
+/* CM waterfall */
+.cm{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;font-family:var(--mono);font-size:12px}
+.cm div{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:10px 12px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.cm b{font-size:15px;color:var(--accent)}
+.cm span{color:var(--muted);line-height:1.4}
+
+/* Code */
+figure{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+figcaption{font-family:var(--mono);font-size:12px;color:var(--muted)}
+pre{margin:0;background:var(--code-bg);color:var(--code-fg);font-family:var(--mono);font-size:12.5px;line-height:1.6;padding:16px 18px;border-radius:6px;overflow-x:auto}
+pre .c{color:var(--code-dim)} pre .k{color:var(--code-key)} pre .s{color:var(--code-str)}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.skills div{display:flex;flex-direction:column;gap:10px;min-width:0}
+.skills h3{font-size:18px;font-weight:700}
+.skills ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px;font-size:14.5px;color:var(--muted)}
+.edu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-size:14.5px}
+.edu p{color:var(--muted)} .edu b{color:var(--fg);font-weight:600}
+
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+@media (max-width:760px){
+  .wrap{gap:64px;padding-block:36px 56px}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpis div:nth-child(3){padding-left:0;border-left:0}
+  .kpis div:nth-child(n+3){border-top:1px solid var(--line)}
+  .project{grid-template-columns:minmax(0,1fr);gap:20px}
+  .case,.edu{grid-template-columns:minmax(0,1fr)}
+  .cm{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .traj li{grid-template-columns:minmax(0,1fr);gap:4px}
+  .pipe{grid-template-columns:minmax(0,1fr)}
+  .pipe li{border-right:0;border-bottom:1px solid var(--line)}
+  .pipe li:last-child{border-bottom:0}
+  .pipe li:not(:last-child)::after{content:"↓";right:auto;left:16px;top:auto;bottom:-9px}
+}
+@media (max-width:420px){.skills{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Mexico City · 7+ years in tech marketplaces</p>
+    <h1>Jose F. Nicasio&#8209;Garnica</h1>
+    <p class="role">Head of Data &amp; Analytics</p>
+    <p class="lede">I build data functions from scratch and turn them into the decision partner of the CEO and CFO. I write the SQL and Python myself, and every pipeline I ship ends in a business decision: who to collect from, what to charge, where to invest.</p>
+    <div class="contact">
+      <span>fconicasiog@gmail.com</span>
+      <a href="https://www.linkedin.com/in/jose-francisco-nicasio-garnica/">linkedin.com/in/jose-francisco-nicasio-garnica</a>
+      <a href="https://github.com/paconicasiog">github.com/paconicasiog</a>
+    </div>
+  </header>
+
+  <section aria-label="Results">
+    <div class="kpis">
+      <div><b>$20.5M</b><span>raised across 3 rounds with the data room and financial model I built</span></div>
+      <div><b>20%</b><span>contribution margin from my Python pricing algorithm</span></div>
+      <div><b>10% → 2%</b><span>late customer payments after redesigning collections with data</span></div>
+      <div><b>25×</b><span>monthly revenue at Moons ($6K → $150K USD), with CAC down 75%</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Career</p>
+      <h2>From operations to leading data</h2>
+    </div>
+    <ol class="traj">
+      <li><time>2025 – present</time><div><h3>Chief of Staff <em>· Mecanizou</em></h3><p>Right hand to the CEO. Retention +15% and LTV +30% through A/B experiments; cash-flow models with a projected 70% improvement; LLM and n8n automations for leadership reporting.</p></div></li>
+      <li><time>2023 – 2024</time><div><h3>Head of Growth &amp; Strategy <em>· Mecanizou</em></h3><p>Data architecture (ETL/ELT, dimensional modeling, governance), ML models for lead scoring and forecasting, and the Series A data room.</p></div></li>
+      <li><time>2021 – 2023</time><div><h3>Strategy &amp; Performance Manager <em>· Mecanizou</em></h3><p>Built the BI practice from zero: the team, SQL standards, a single source of truth and the pricing algorithm.</p></div></li>
+      <li><time>2017 – 2021</time><div><h3>Kavak · Moons · Didi · Uber (Qualfon)</h3><p>Inventory turnover cut from 45 to 20 days, $500K a month in fraud prevented, executive BI in Power BI, led a team of 20.</p></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Projects</p>
+      <h2>Code that moved decisions</h2>
+      <p>Five repositories, each with the business problem it solved and what changed afterwards.</p>
+    </div>
+
+    <div class="projects">
+
+      <!-- Cobranza -->
+      <article class="project">
+        <aside class="p-side">
+          <p class="p-kind">Collections · Automation</p>
+          <h3>Automated collections</h3>
+          <ul class="stack"><li>Python</li><li>Redshift</li><li>Postgres</li><li>Google Drive API</li><li>PDF</li></ul>
+          <p class="repo"><span>paconicasiog/Cobranza-Fisica</span><span class="lock">code available on request</span></p>
+        </aside>
+        <div class="p-main">
+          <div class="case">
+            <div><h4>Problem</h4><p>Formal collection notices to overdue repair shops were assembled by hand, one client at a time, and follow-up lived in scattered emails.</p></div>
+            <div><h4>What I built</h4><p>A pipeline that joins overdue balances in Redshift with invoice detail in Postgres, generates each notice as a PDF and files it in a per-client Google Drive folder.</p></div>
+          </div>
+          <ol class="pipe">
+            <li><span class="st">input</span><span class="nm">Client list</span><span class="dt">shop IDs to review</span></li>
+            <li><span class="st">Redshift</span><span class="nm">Current debt</span><span class="dt">invoices and overdue amount</span></li>
+            <li><span class="st">Postgres</span><span class="nm">Invoice detail</span><span class="dt">legal name, address, contact</span></li>
+            <li><span class="st">output</span><span class="nm">PDF + Drive folder</span><span class="dt">tracking log with a link per client</span></li>
+          </ol>
+          <div class="impact"><h4>Decision and process it improved</h4><p>The team stopped assembling documents and started deciding who to escalate. It was one piece of the collections redesign that took late payments from 10% to 2%.</p></div>
+        </div>
+      </article>
+
+      <!-- PnL -->
+      <article class="project">
+        <aside class="p-side">
+          <p class="p-kind">Profitability · Pricing</p>
+          <h3>P&amp;L per client</h3>
+          <ul class="stack"><li>Python</li><li>pandas</li><li>NumPy</li><li>Redshift</li><li>Postgres</li></ul>
+          <p class="repo"><span>paconicasiog/pnl_per_client</span><span class="lock">private repo · code available on request</span></p>
+        </aside>
+        <div class="p-main">
+          <div class="case">
+            <div><h4>Problem</h4><p>Every shop had a fixed markup by tier, even though some cancelled often, ordered over WhatsApp, paid late or cost more in logistics.</p></div>
+            <div><h4>What I built</h4><p>A weekly and all-time income statement per client, plus a rules engine that adjusts each markup to actual behavior.</p></div>
+          </div>
+          <div class="cm" aria-label="Contribution margin waterfall">
+            <div><b>CM1</b><span>net sales − product cost</span></div>
+            <div><b>CM2</b><span>− logistics and incidents</span></div>
+            <div><b>CM3</b><span>− financing cost of installments and extensions</span></div>
+            <div><b>CM4</b><span>− coupons and discounts</span></div>
+          </div>
+          <figure>
+            <figcaption>main.py — the adjustment caps differ for the top 10% of clients by GMV</figcaption>
+<pre>MAX_PENALTY_REGULAR = <span class="s">0.03</span>        <span class="c"># 3% cap for regular clients</span>
+MAX_PENALTY_TOP_PERFORMER = <span class="s">0.02</span>  <span class="c"># 2% cap for top 10% performers</span>
+
+threshold = df_with_gmv[<span class="s">'total_gmv_net'</span>].quantile(<span class="s">1</span> - percentile)
+df[<span class="s">'new_segment'</span>] = df[<span class="s">'markup'</span>] + df[<span class="s">'total_points_to_add'</span>]</pre>
+          </figure>
+          <div class="impact"><h4>Decision it enables</h4><p>The sales team prices each client on evidence and tunes thresholds in a CSV without touching code. It applies the same margin-by-category-and-client logic behind the 20% contribution margin.</p></div>
+        </div>
+      </article>
+
+      <!-- Data lake -->
+      <article class="project">
+        <aside class="p-side">
+          <p class="p-kind">Data platform</p>
+          <h3>Data lake: Silver layer</h3>
+          <ul class="stack"><li>Python</li><li>Pub/Sub</li><li>Cloud Functions</li><li>BigQuery</li><li>PyArrow</li><li>Parquet</li><li>GCS</li></ul>
+          <p class="repo"><a href="https://github.com/paconicasiog/data-lake-silver-data-processing">paconicasiog/data-lake-silver-data-processing</a><span>public repo</span></p>
+        </aside>
+        <div class="p-main">
+          <div class="case">
+            <div><h4>Problem</h4><p>Every new data lake table required new code, and business logic ended up buried in scripts that were hard to audit.</p></div>
+            <div><h4>What I built</h4><p>A serverless function that receives a Pub/Sub message, reads that table's SQL from Cloud Storage, runs it on BigQuery and writes date-partitioned Parquet.</p></div>
+          </div>
+          <ol class="pipe">
+            <li><span class="st">event</span><span class="nm">Pub/Sub message</span><span class="dt">dataset, layer and partitions</span></li>
+            <li><span class="st">logic</span><span class="nm">SQL from GCS</span><span class="dt">rules live outside the code</span></li>
+            <li><span class="st">compute</span><span class="nm">BigQuery</span><span class="dt">types mapped to Arrow</span></li>
+            <li><span class="st">target</span><span class="nm">Partitioned Parquet</span><span class="dt">safe to rerun, no duplicates</span></li>
+          </ol>
+          <div class="impact"><h4>Process it improved</h4><p>Adding an analytics table means writing a SQL file, not deploying code. Analysts own their logic, and metrics have a single source of truth.</p></div>
+        </div>
+      </article>
+
+      <!-- db_redshift -->
+      <article class="project">
+        <aside class="p-side">
+          <p class="p-kind">Data platform</p>
+          <h3>Redshift connectors</h3>
+          <ul class="stack"><li>Python</li><li>boto3</li><li>SQLAlchemy</li><li>psycopg2</li><li>AWS IAM</li></ul>
+          <p class="repo"><a href="https://github.com/paconicasiog/db_redshift">paconicasiog/db_redshift</a><span>public repo</span></p>
+        </aside>
+        <div class="p-main">
+          <div class="case">
+            <div><h4>Problem</h4><p>Every script on the team opened its own connection, with copied passwords and row-by-row loads that failed halfway through.</p></div>
+            <div><h4>What I built</h4><p>An internal library with context managers for Redshift (Serverless and provisioned) and Postgres, temporary IAM credentials and chunked bulk loads.</p></div>
+          </div>
+          <figure>
+            <figcaption>Typical use from any team analysis</figcaption>
+<pre>df = RedshiftData().query_data_redshift_to_df(query)   <span class="c"># CTEs and window functions without driver errors</span>
+
+RedshiftData().insert_data_redshift_from_df(
+    df, table_name=<span class="s">"client_pnl"</span>, schema_name=<span class="s">"analytics"</span>, if_exists=<span class="s">"append"</span>,
+    where_conditions={<span class="s">"period"</span>: <span class="s">"2026-W47"</span>},   <span class="c"># deletes before insert: safe to rerun</span>
+)</pre>
+          </figure>
+          <div class="impact"><h4>Process it improved</h4><p>It is the foundation that P&amp;L per client and collections run on. It standardizes how the team reads and writes data, with no passwords in code.</p></div>
+        </div>
+      </article>
+
+      <!-- Fincasio -->
+      <article class="project">
+        <aside class="p-side">
+          <p class="p-kind">Full-stack Python · AI</p>
+          <h3>Fincasio</h3>
+          <ul class="stack"><li>Python</li><li>Reflex</li><li>FastAPI</li><li>LLMs</li><li>Postgres</li><li>Docker</li><li>Cloud Run</li></ul>
+          <p class="repo"><span>paconicasiog/fincasio-app</span><span class="lock">private repo · demo on request</span></p>
+        </aside>
+        <div class="p-main">
+          <div class="case">
+            <div><h4>Problem</h4><p>My finances lived in a Google Sheet with Apps Script: slow on mobile, fragile with installment purchases and with no bank reconciliation.</p></div>
+            <div><h4>What I built</h4><p>An installable app written 100% in Python with budgeting, HSBC and AmEx statement reconciliation, net worth tracking, and voice expense logging through an LLM.</p></div>
+          </div>
+          <ol class="pipe">
+            <li><span class="st">voice</span><span class="nm">Telegram voice note</span><span class="dt">“tacos, 185, on the amex”</span></li>
+            <li><span class="st">LLM</span><span class="nm">Transcribes and extracts JSON</span><span class="dt">checks catalogs so it never invents accounts</span></li>
+            <li><span class="st">API</span><span class="nm">FastAPI + Pydantic</span><span class="dt">validated and API-key protected</span></li>
+            <li><span class="st">review</span><span class="nm">Saved as pending</span><span class="dt">I confirm it in the app</span></li>
+          </ol>
+          <div class="impact"><h4>Process it improved</h4><p>Logging an expense takes seconds and bank reconciliation is automatic. Money is computed in integer cents, so installment plans always add up.</p></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Toolkit</p>
+      <h2>What I use</h2>
+    </div>
+    <div class="skills">
+      <div><h3>Data leadership</h3><ul><li>Data strategy and governance</li><li>OKRs and unit economics</li><li>KPI design</li><li>Building analytics teams</li></ul></div>
+      <div><h3>Engineering</h3><ul><li>Advanced SQL</li><li>Snowflake, BigQuery, Redshift</li><li>ETL/ELT pipelines</li><li>Dimensional modeling</li></ul></div>
+      <div><h3>Analytics and ML</h3><ul><li>Python: pandas, scikit-learn, statsmodels</li><li>A/B testing and cohorts</li><li>Forecasting and segmentation</li><li>Price elasticity</li></ul></div>
+      <div><h3>AI and BI</h3><ul><li>LLM APIs (Claude, ChatGPT)</li><li>AI agents and n8n</li><li>Power BI, Tableau, Retool</li><li>Amplitude</li></ul></div>
+    </div>
+    <div class="edu">
+      <p><b>B.Eng. Industrial Engineering</b> · IEU · 2024 – 2026</p>
+      <p><b>Diploma in Business Strategy</b> · Universidad Anáhuac</p>
+      <p><b>Computer Science</b> (coursework) · UNAM</p>
+      <p><b>Lean Six Sigma Green Belt</b> · Spanish (native) · English C1 · Portuguese B1</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Jose F. Nicasio-Garnica · CDMX</span>
+    <a href="https://github.com/paconicasiog">github.com/paconicasiog</a>
+  </footer>
+</div>
+</body>
+</html>
